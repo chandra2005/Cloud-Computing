@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topia.io Clone - Multiplayer Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="login-screen">
+            <div class="login-box">
+                <h1>🌍 Topia.io Clone</h1>
+                <p>Masukkan nama untuk bergabung</p>
+                <input type="text" id="username-input" placeholder="Nama kamu..." maxlength="20">
+                <button id="join-btn">Bergabung</button>
+            </div>
+        </div>
+
+        <div id="game-screen" style="display: none;">
+            <div id="hud">
+                <div id="player-info">
+                    <span id="player-name"></span>
+                    <span id="online-count">👥 0 online</span>
+                    <span id="world-info">🌍 Dunia yang Lebih Luas</span>
+                </div>
+                <div id="controls-info">
+                    WASD/Arrow Keys: Gerak | Enter: Chat | Minimap: Kanan Atas
+                </div>
+            </div>
+
+            <canvas id="game-canvas"></canvas>
+
+            <div id="chat-container">
+                <div id="chat-messages"></div>
+                <div id="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Tekan Enter untuk chat..." maxlength="100">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>
