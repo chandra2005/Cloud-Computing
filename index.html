@@ -11,9 +11,53 @@
         <div id="login-screen">
             <div class="login-box">
                 <h1>🌍 Topia.io Clone</h1>
-                <p>Masukkan nama untuk bergabung</p>
-                <input type="text" id="username-input" placeholder="Nama kamu..." maxlength="20">
-                <button id="join-btn">Bergabung</button>
+                
+                <!-- Character Selection Step -->
+                <div id="character-selection" class="login-step">
+                    <p class="step-title">Pilih Karakter Slime Kamu</p>
+                    <div class="character-grid">
+                        <div class="character-option" data-color="#4A90E2" data-name="Blue Slime">
+                            <div class="character-preview" style="background: linear-gradient(135deg, #6BB6FF 0%, #4A90E2 50%, #3A7BC8 100%);"></div>
+                            <span>Blue</span>
+                        </div>
+                        <div class="character-option" data-color="#50C878" data-name="Green Slime">
+                            <div class="character-preview" style="background: linear-gradient(135deg, #7FE8A3 0%, #50C878 50%, #3FA860 100%);"></div>
+                            <span>Green</span>
+                        </div>
+                        <div class="character-option" data-color="#FF6B9D" data-name="Pink Slime">
+                            <div class="character-preview" style="background: linear-gradient(135deg, #FF9EBF 0%, #FF6B9D 50%, #E5537B 100%);"></div>
+                            <span>Pink</span>
+                        </div>
+                        <div class="character-option" data-color="#FFB84D" data-name="Orange Slime">
+                            <div class="character-preview" style="background: linear-gradient(135deg, #FFCD7D 0%, #FFB84D 50%, #E5A035 100%);"></div>
+                            <span>Orange</span>
+                        </div>
+                        <div class="character-option" data-color="#9B59B6" data-name="Purple Slime">
+                            <div class="character-preview" style="background: linear-gradient(135deg, #B87FD4 0%, #9B59B6 50%, #7D3C98 100%);"></div>
+                            <span>Purple</span>
+                        </div>
+                        <div class="character-option" data-color="#E74C3C" data-name="Red Slime">
+                            <div class="character-preview" style="background: linear-gradient(135deg, #F1776D 0%, #E74C3C 50%, #C0392B 100%);"></div>
+                            <span>Red</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Name Input Step -->
+                <div id="name-input" class="login-step" style="display: none;">
+                    <p class="step-title">Masukkan Nama Kamu</p>
+                    <div class="selected-character-display">
+                        <div id="selected-character-preview" class="character-preview-large"></div>
+                        <span id="selected-character-name">Blue Slime</span>
+                    </div>
+                    <input type="text" id="username-input" placeholder="Nama kamu..." maxlength="20">
+                    <div class="button-group">
+                        <button id="back-btn" class="secondary-btn">← Kembali</button>
+                        <button id="join-btn">Bergabung</button>
+                    </div>
+                </div>
+                
+                <p class="info-text">💡 Tip: Kamu bisa masuk ke rumah untuk bermain mini-game!</p>
             </div>
         </div>
 
@@ -22,10 +66,10 @@
                 <div id="player-info">
                     <span id="player-name"></span>
                     <span id="online-count">👥 0 online</span>
-                    <span id="world-info">🌍 Dunia yang Lebih Luas</span>
+                    <span id="world-info">🌍 Lobby - Explore the world!</span>
                 </div>
                 <div id="controls-info">
-                    WASD/Arrow Keys: Gerak | Enter: Chat | Minimap: Kanan Atas
+                    WASD: Move | Enter: Chat | E: Enter House
                 </div>
             </div>
 
@@ -41,6 +85,7 @@
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
+    <script src="platformer-game.js"></script>
     <script src="client.js"></script>
 </body>
 </html>

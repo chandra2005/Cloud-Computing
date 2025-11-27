@@ -14,6 +14,7 @@ app.use(express.static(path.join(__dirname)));
 
 // Game state
 const players = {};
+const platformerLeaderboard = []; // Leaderboard for platformer game
 const COLORS = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2'];
 
 // World objects
@@ -56,12 +57,26 @@ function generateWorldObjects() {
         });
     }
 
-    // Generate houses
+    // Generate houses with specific games
+    const houseGames = [
+        { name: '🎮 Sky Jumper', type: 'platformer', x: 1500, y: 1500 }, // Center - easy to find!
+        { name: '🧩 Puzzle Quest', type: 'puzzle' },
+        { name: '❓ Brain Quiz', type: 'quiz' },
+        { name: '🏃 Speed Run', type: 'coming-soon' },
+        { name: '🎯 Target Shoot', type: 'coming-soon' },
+        { name: '🎨 Color Match', type: 'coming-soon' },
+        { name: '🎵 Music Notes', type: 'coming-soon' },
+        { name: '🧠 Memory Game', type: 'coming-soon' }
+    ];
+    
     for (let i = 0; i < 8; i++) {
+        const game = houseGames[i];
         worldObjects.houses.push({
-            x: Math.random() * (WORLD_WIDTH - 400) + 200,
-            y: Math.random() * (WORLD_HEIGHT - 400) + 200,
-            size: Math.random() * 20 + 70
+            x: game.x || Math.random() * (WORLD_WIDTH - 400) + 200,
+            y: game.y || Math.random() * (WORLD_HEIGHT - 400) + 200,
+            size: i === 0 ? 100 : Math.random() * 20 + 70, // Sky Jumper house bigger
+            gameName: game.name,
+            gameType: game.type
         });
     }
 
@@ -71,6 +86,7 @@ function generateWorldObjects() {
         bushes: worldObjects.bushes.length,
         houses: worldObjects.houses.length
     });
+    console.log('📍 First house (Sky Jumper):', worldObjects.houses[0]);
 }
 
 // Initialize world
@@ -102,7 +118,7 @@ io.on('connection', (socket) => {
             username: data.username,
             x: spawnPos.x,
             y: spawnPos.y,
-            color: getRandomColor()
+            color: data.color || getRandomColor()
         };
 
         // Send init data to the new player
@@ -114,7 +130,7 @@ io.on('connection', (socket) => {
         // Notify other players
         socket.broadcast.emit('playerJoined', players[socket.id]);
 
-        console.log(`Player joined: ${data.username} (${socket.id})`);
+        console.log(`Player joined: ${data.username} (${socket.id}) - Color: ${players[socket.id].color}`);
         console.log(`Total players: ${Object.keys(players).length}`);
     });
 
@@ -142,6 +158,7 @@ io.on('connection', (socket) => {
     socket.on('chat', (message) => {
         if (players[socket.id]) {
             const chatData = {
+                playerId: socket.id,
                 username: players[socket.id].username,
                 message: message,
                 timestamp: Date.now()
@@ -152,6 +169,40 @@ io.on('connection', (socket) => {
 
             console.log(`Chat - ${chatData.username}: ${message}`);
         }
+    });
+    
+    // Handle platformer score submission
+    socket.on('platformerScore', (data) => {
+        const { playerName, score, time } = data;
+        
+        // Add to leaderboard
+        platformerLeaderboard.push({
+            playerName,
+            score,
+            time,
+            timestamp: Date.now()
+        });
+        
+        // Sort by score (descending), then by time (ascending)
+        platformerLeaderboard.sort((a, b) => {
+            if (b.score !== a.score) return b.score - a.score;
+            return a.time - b.time;
+        });
+        
+        // Keep only top 10
+        if (platformerLeaderboard.length > 10) {
+            platformerLeaderboard.length = 10;
+        }
+        
+        console.log(`🏆 New score: ${playerName} - ${score} coins in ${time}s`);
+        
+        // Broadcast updated leaderboard
+        io.emit('platformerLeaderboard', platformerLeaderboard);
+    });
+    
+    // Handle leaderboard request
+    socket.on('getPlatformerLeaderboard', () => {
+        socket.emit('platformerLeaderboard', platformerLeaderboard);
     });
 
     // Handle disconnect

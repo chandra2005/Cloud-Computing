@@ -1,21 +1,40 @@
-# Topia.io Clone - Game Demo Multiplayer
+# Topia.io Clone - Multiplayer Lobby Game with Mini-Games
 
-Game multiplayer online demo yang mirip dengan topia.io dengan visual pixel art. Pemain dapat bergerak di dunia virtual, berinteraksi dengan pemain lain, dan chat secara real-time. Dilengkapi dengan collision detection dan efek partikel!
+Game multiplayer online yang terinspirasi dari topia.io dengan karakter **Slime seperti Rimuru**! Fitur lobby system dengan rumah sebagai portal ke mini-game yang berbeda.
 
-## ✨ Fitur
+## ✨ Fitur Utama
 
-- 🎮 **Multiplayer Real-time** - Bermain bersama pemain lain secara online
-- 🚶 **Kontrol Karakter** - Gerakkan avatar dengan WASD atau Arrow Keys
-- 💬 **Chat System** - Komunikasi dengan pemain lain
-- 🎨 **Pixel Art Style** - Visual bergaya pixel seperti topia.io
-- 🌍 **Dunia Virtual** - Peta 3000x3000 pixels dengan dekorasi
-- 🌳 **Objek Dunia** - 80 pohon, 50 batu, 60 semak, 8 rumah
-- 🚫 **Collision Detection** - Tidak bisa jalan menembus pohon, batu, rumah
-- ✨ **Particle Effects** - Efek debu saat berjalan
-- 🗺️ **Minimap** - Peta kecil untuk navigasi
-- 📊 **Player Counter** - Melihat jumlah pemain online
-- 🎭 **Walking Animation** - Animasi bobbing saat bergerak
-- 🌾 **Grass Texture** - Tekstur rumput yang detail
+### 🎮 **Gameplay**
+- 🟦 **Karakter Slime Rimuru Style** - Avatar gel/jelly dengan efek glossy, bouncy animation
+- 🎨 **Smooth Graphics** - Visual berkualitas tinggi dengan gradients dan shadows
+- 🚶 **Free Movement** - WASD controls dengan collision detection
+- 🏠 **House Portal System** - Masuk ke rumah untuk akses mini-game
+- 💬 **Chat Bubble System** - Chat muncul di atas karakter seperti Growtopia
+- 🗺️ **Minimap** - Navigasi dunia yang luas
+
+### 🌍 **World (Lobby)**
+- Peta 3000x3000 pixels dengan tekstur rumput detail
+- 80 pohon dengan animasi goyang
+- 50 batu dengan shading realistis  
+- 60 semak dekoratif
+- 8 rumah (portal ke mini-game)
+
+### 🏠 **Mini-Games (Dalam Rumah)**
+Setiap rumah memiliki mini-game random:
+- 🧩 **Puzzle Game** - Slide puzzle
+- 🎮 **Platformer** - Jump & collect coins
+- ❓ **Quiz Game** - Trivia questions
+
+### 💬 **Chat System**
+- Chat bubble muncul di atas nama pemain
+- Auto-fade setelah 5 detik
+- Support word wrapping
+- Real-time multiplayer chat
+
+### 🚫 **Collision System**
+- Tidak bisa tembus pohon, batu, rumah
+- Boundary detection
+- Smooth sliding movement
 
 ## 🚀 Cara Menjalankan
 
